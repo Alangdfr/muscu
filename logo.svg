@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="34%" r="78%">
+      <stop offset="0" stop-color="#2b2214"/>
+      <stop offset="0.55" stop-color="#120e09"/>
+      <stop offset="1" stop-color="#070605"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff1c4"/>
+      <stop offset="0.28" stop-color="#f6cf6a"/>
+      <stop offset="0.62" stop-color="#d9a33a"/>
+      <stop offset="1" stop-color="#9c6b1c"/>
+    </linearGradient>
+    <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3cf"/>
+      <stop offset="0.35" stop-color="#f4c95c"/>
+      <stop offset="0.7" stop-color="#d39a30"/>
+      <stop offset="1" stop-color="#a5711f"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f2b941" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#f2b941" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="330" fill="url(#glow)"/>
+  <!-- anneau de progression -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="url(#track)" stroke-width="38"/>
+  <path d="M 299.9 724.1 A 300 300 0 1 1 812 512" fill="none" stroke="url(#gold)" stroke-width="38" stroke-linecap="round" filter="url(#shadow)"/>
+  <!-- haltère -->
+  <g transform="translate(512 512) scale(0.8) translate(-512 -512)">
+  <g filter="url(#shadow)">
+    <rect x="352" y="491" width="320" height="42" rx="21" fill="url(#goldV)"/>
+    <rect x="300" y="382" width="74" height="260" rx="30" fill="url(#goldV)"/>
+    <rect x="650" y="382" width="74" height="260" rx="30" fill="url(#goldV)"/>
+    <rect x="240" y="428" width="56" height="168" rx="24" fill="url(#goldV)"/>
+    <rect x="728" y="428" width="56" height="168" rx="24" fill="url(#goldV)"/>
+  </g>
+  <!-- reflets -->
+  <g fill="#fffaf0" opacity="0.55">
+    <rect x="314" y="398" width="14" height="110" rx="7"/>
+    <rect x="664" y="398" width="14" height="110" rx="7"/>
+    <rect x="252" y="442" width="11" height="62" rx="5.5"/>
+    <rect x="740" y="442" width="11" height="62" rx="5.5"/>
+  </g>
+  </g>
+</svg>
