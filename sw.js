@@ -1,7 +1,7 @@
 // Service worker Muscu : l'app s'ouvre instantanément, même sans réseau.
 // Stratégie : réponse immédiate depuis le cache, mise à jour en arrière-plan
 // (la nouvelle version s'applique au lancement suivant).
-const CACHE = 'muscu-v2-or-1';
+const CACHE = 'muscu-v2-1';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
 
 self.addEventListener('install', (event) => {
