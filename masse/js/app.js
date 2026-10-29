@@ -542,7 +542,7 @@ function settingsSheet() {
     <button class="list-btn" data-act="export"><span>Sauvegarder mes données<br><small>Un fichier .json à garder dans Fichiers ou iCloud Drive</small></span></button>
     <label class="list-btn" style="cursor:pointer"><span>Restaurer une sauvegarde<br><small>Remplace les données actuelles</small></span><input type="file" accept="application/json,.json" data-input="import" hidden></label>
     <button class="list-btn" data-act="csv"><span>Exporter en tableau (CSV)<br><small>Toutes les séries, pour un tableur</small></span></button>
-    <a class="list-btn" href="./v2/" style="color:inherit;text-decoration:none"><span>Ancienne version (2.1)<br><small>Ton ancien programme et son historique</small></span></a>
+    <a class="list-btn" href="../" style="color:inherit;text-decoration:none"><span>Ancienne version (2.1)<br><small>Ton ancien programme et son historique</small></span></a>
     <button class="list-btn" data-act="reset" style="color:var(--bad)"><span>Tout effacer</span></button>`);
 }
 

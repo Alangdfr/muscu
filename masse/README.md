@@ -5,12 +5,12 @@ Elle fonctionne hors ligne, et toutes les données restent sur le téléphone.
 
 ## Installer sur iPhone
 
-1. Ouvre **https://alangdfr.github.io/muscu/** dans Safari.
+1. Ouvre **https://alangdfr.github.io/muscu/masse/** dans Safari.
 2. Appuie sur le bouton Partager, puis sur **Sur l'écran d'accueil**.
 3. Lance l'app depuis son icône : elle s'ouvre en plein écran, même sans réseau.
 
-Si l'ancienne icône Muscu est déjà sur ton écran d'accueil, elle ouvre la nouvelle version
-(il faut parfois la lancer deux fois pour que la mise à jour s'applique).
+L'ancienne app (version 2.1) reste à https://alangdfr.github.io/muscu/ avec sa propre icône.
+Si la page affiche l'ancienne app au premier essai, recharge-la une fois.
 
 ## Ce que fait l'app
 
@@ -26,7 +26,7 @@ Les données sont dans le stockage du navigateur de l'iPhone. Fais une sauvegard
 Réglages, puis **Sauvegarder mes données** (fichier .json à garder dans iCloud Drive).
 La même page permet de restaurer une sauvegarde ou d'exporter un CSV.
 
-L'ancienne version 2.1 reste disponible dans [`v2/`](./v2/), avec son historique.
+L'ancienne version 2.1 reste à la racine du dépôt, avec son historique.
 
 ## Structure
 

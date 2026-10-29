@@ -1,39 +1,37 @@
-// Service worker Muscu 3 : l'app s'ouvre sans réseau.
-// Réponse immédiate depuis le cache, mise à jour en arrière-plan (appliquée au lancement suivant).
-// L'ancienne version (dossier v2/) garde son propre service worker : on ne la touche pas.
-const CACHE = 'muscu-v3-1';
-const ASSETS = [
-  './', './index.html', './manifest.webmanifest', './css/app.css',
-  './js/app.js', './js/store.js', './js/program.js',
-  './icons/icon.svg', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png',
-];
+// Service worker Muscu : l'app s'ouvre instantanément, même sans réseau.
+// Stratégie : réponse immédiate depuis le cache, mise à jour en arrière-plan
+// (la nouvelle version s'applique au lancement suivant).
+const CACHE = 'muscu-v2-1';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('muscu-v3') && k !== CACHE).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim()),
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE && !k.startsWith('muscu-v3')).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  const url = new URL(req.url);
-  if (req.method !== 'GET' || url.origin !== self.location.origin) return;
-  const base = new URL('./', self.location).pathname;
-  if (url.pathname.startsWith(base + 'v2/')) return;
-  const key = req.mode === 'navigate' ? './index.html' : req;
+  const request = event.request;
+  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+  // La nouvelle app (dossier masse/) a son propre service worker : on la laisse passer.
+  if (new URL(request.url).pathname.includes('/masse/')) return;
+  const key = request.mode === 'navigate' ? './index.html' : request;
   event.respondWith(
     caches.open(CACHE).then(async (cache) => {
       const cached = await cache.match(key, { ignoreSearch: true });
-      const network = fetch(req)
-        .then((res) => { if (res && res.ok) cache.put(key, res.clone()); return res; })
+      const network = fetch(request)
+        .then((response) => {
+          if (response && response.ok) cache.put(key, response.clone());
+          return response;
+        })
         .catch(() => cached);
       return cached || network;
-    }),
+    })
   );
 });
