@@ -189,7 +189,7 @@ export function roundTo(x, step) { if (!step) return Math.round(x * 2) / 2; retu
 export function suggestion(e, currentId) {
   const hist = exerciseHistory(e.name, currentId);
   const info = weekInfo(+currentId.match(/^w(\d+)/)[1]);
-  const step = e.meta.inc || 2.5;
+  const step = e.meta.inc ?? 2.5;
   if (!hist.length) {
     const m = (e.note || '').match(/Départ (\d+(?:[.,]\d+)?) kg/);
     return { kg: m ? parseFloat(m[1].replace(',', '.')) : (e.meta.eq === 'pdc' ? 0 : null), reps: e.lo, why: m ? 'Charge de départ du programme' : 'Trouve une charge qui tombe dans la fourchette', fresh: true };
@@ -209,9 +209,9 @@ export function suggestion(e, currentId) {
   } else if (e.meta.eq === 'pdc' && kg === 0 && allTop) {
     // Poids du corps : on monte les reps jusqu'à 8, puis on leste
     const minReps = Math.min(...topSets.map((s) => s.reps));
-    out = minReps >= 8 && step
+    out = minReps >= 8 && step && e.meta.m !== 'Abdos'
       ? { kg: step, reps: e.lo, why: `8 reps strictes atteintes : leste de ${String(step).replace('.', ',')} kg`, up: true }
-      : { kg: 0, reps: minReps + 1, why: 'Une rep de plus, on leste à partir de 8' };
+      : { kg: 0, reps: minReps + 1, why: step && e.meta.m !== 'Abdos' ? 'Une rep de plus, on leste à partir de 8' : 'Vise une rep de plus' };
   } else if (allTop && step) {
     out = { kg: roundTo(kg + step, step), reps: e.lo, why: `Haut de fourchette atteint : +${String(step).replace('.', ',')} kg`, up: true };
   } else {
